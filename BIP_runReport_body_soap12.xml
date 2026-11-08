@@ -1,0 +1,27 @@
+<!-- Chapter 16: body template of External REST tool AA_BIP_REPORT_TOOL, function runSupplierPoReport.
+     POST /xmlpserver/services/ExternalReportWSSService
+     Header Content-Type: application/soap+xml; charset=UTF-8   (SOAP 1.2; text/xml gives HTTP 415)
+     {SupplierId} is the function parameter. -->
+<soap:Envelope
+    xmlns:soap="http://www.w3.org/2003/05/soap-envelope"
+    xmlns:pub="http://xmlns.oracle.com/oxp/service/PublicReportService">
+  <soap:Header/>
+  <soap:Body>
+    <pub:runReport>
+      <pub:reportRequest>
+        <pub:attributeFormat>csv</pub:attributeFormat>
+        <pub:byPassCache>true</pub:byPassCache>
+        <pub:parameterNameValues>
+          <pub:item>
+            <pub:name>P_VENDOR_ID</pub:name>
+            <pub:values>
+              <pub:item>{SupplierId}</pub:item>
+            </pub:values>
+          </pub:item>
+        </pub:parameterNameValues>
+        <pub:reportAbsolutePath>/Custom/BIP-Report/Supplier_Data_Report.xdo</pub:reportAbsolutePath>
+        <pub:sizeOfDataChunkDownload>-1</pub:sizeOfDataChunkDownload>
+      </pub:reportRequest>
+    </pub:runReport>
+  </soap:Body>
+</soap:Envelope>
